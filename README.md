@@ -1,10 +1,25 @@
+**English** | [简体中文](README.zh-CN.md)
+
 # LeoClaw
 
-LeoClaw is a small ReAct-style coding agent CLI built with Typer and LangChain.
-It supports DeepSeek and OpenAI models. Its file tools resolve every path
-against one workspace before reading or writing.
+A small ReAct-style coding agent CLI using LangChain model integrations and tool calling to inspect and modify files inside a selected workspace.
+
+**Category:** Artificial Intelligence · AI Agents  
+**Stack:** Python 3.10+ · LangChain Core · Typer · Rich
+
+## Features
+
+- DeepSeek and OpenAI providers selected through environment variables.
+- A bounded model/tool loop with live tool-call and result output.
+- Workspace-aware file reading, writing, editing, and text search.
+- Shell commands launched from the workspace with a timeout.
+- A pure-Python hash fallback for Windows environments that block the unsigned `xxhash` extension.
+
+The current implementation uses an explicit Python agent loop; LangGraph is not a runtime dependency.
 
 ## Install
+
+From the repository root in PowerShell:
 
 ```powershell
 python -m venv .venv
@@ -13,23 +28,16 @@ python -m pip install -e ".[dev]"
 Copy-Item .env.example .env
 ```
 
-To use DeepSeek, add your API key to `.env`:
+## Configure a provider
+
+Set one provider and its API key in `.env`:
 
 ```dotenv
 MODEL_PROVIDER=deepseek
 DEEPSEEK_API_KEY=your-deepseek-key
-DEEPSEEK_MODEL=deepseek-v4-pro
 ```
 
-Do not wrap the key in quotes and do not commit `.env` to Git.
-
-To switch back to OpenAI, change the same file:
-
-```dotenv
-MODEL_PROVIDER=openai
-OPENAI_API_KEY=your-openai-key
-OPENAI_MODEL=gpt-5.6-sol
-```
+Alternatively, use `MODEL_PROVIDER=openai` with `OPENAI_API_KEY`. Optional `DEEPSEEK_MODEL` and `OPENAI_MODEL` settings are documented in `.env.example`; choose IDs available to your account. Keep `.env` out of version control.
 
 ## Run
 
@@ -37,31 +45,26 @@ OPENAI_MODEL=gpt-5.6-sol
 leoclaw "Create a hello.py script" --workspace .\demo
 ```
 
-If `--workspace` is omitted, LeoClaw creates `.leoclaw-workspace` in the
-current directory.
+Without `--workspace`, the CLI creates `.leoclaw-workspace` in the current directory. A run prints tool activity followed by the final response.
 
-`DEEPSEEK_MODEL` and `OPENAI_MODEL` are optional. The default provider is
-DeepSeek. LeoClaw uses LangChain's provider-specific `ChatDeepSeek` integration
-so that tool calls and DeepSeek response metadata remain available to the
-agent loop.
+## Structure and development
 
-During a run, the Rich-powered CLI prints each tool call and result as it
-happens, followed by the model's final answer.
+| Path | Purpose |
+| --- | --- |
+| `src/leoclaw/core/` | Agent loop, runtime state, and workspace paths |
+| `src/leoclaw/providers/` | DeepSeek/OpenAI model construction |
+| `src/leoclaw/tools/` | File, search, and shell tools |
+| `src/leoclaw/cli/` | Typer interface |
+| `demo/`, `tests/` | Example workspace and automated tests |
 
-On Windows systems that block LangSmith's unsigned `xxhash` extension,
-LeoClaw automatically uses a deterministic pure-Python hash fallback during
-startup. It does not disable or modify Windows application-control policies.
-
-## Test
-
-```powershell
+```bash
 pytest
 ```
 
-## Safety boundary
+File and grep tools reject resolved paths outside the workspace, including existing symlink escapes. Shell subprocesses are not an operating-system sandbox; use trusted tasks and workspaces.
 
-File and grep tools reject paths that resolve outside the workspace, including
-paths that escape through `..` or existing symlinks. `BashTool` starts commands
-with the workspace as their working directory and enforces a timeout. A child
-process is not an operating-system sandbox, so do not expose the CLI to
-untrusted users or prompts when shell access is enabled.
+## Author and license
+
+Author / maintainer: [https://github.com/OOOHGOD](https://github.com/OOOHGOD).
+
+Eligible original contributions are under the [MIT License](LICENSE), permitting commercial use and modification with preservation of copyright and license notices in copies or substantial portions. [License scope](LICENSE_SCOPE.md) explains third-party exclusions and upstream terms.
