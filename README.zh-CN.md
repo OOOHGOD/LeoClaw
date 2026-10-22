@@ -1,6 +1,25 @@
-[English](README.md) | **简体中文**
+<div align="center">
 
 # LeoClaw
+
+基于 LangChain Tool Calling 的轻量 ReAct 编程 Agent。
+
+[English](README.md) · **简体中文**
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square) ![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat-square) ![Typer](https://img.shields.io/badge/Typer-009688?style=flat-square) [![MIT License](https://img.shields.io/badge/License-MIT-2563EB?style=flat-square)](LICENSE)
+
+</div>
+
+<p align="center">
+<a href="#项目概览">项目概览</a> · <a href="#安装与配置">安装与配置</a> · <a href="#运行与开发">运行与开发</a> · <a href="#作者与许可">作者与许可</a>
+</p>
+
+---
+
+> **项目定位** · Agent CLI
+
+
+## 项目概览
 
 一个小型 ReAct 编程 Agent 命令行工具，使用 LangChain 模型适配和工具调用，在指定目录中读写文件、搜索和执行命令。当前是显式 Python Agent 循环，运行依赖不包含 LangGraph。
 
@@ -28,8 +47,8 @@ pytest
 
 文件和搜索工具检查解析后的路径，阻止越出工作目录；Shell 子进程不是操作系统沙箱，请使用可信任务和目录。Windows 包含纯 Python 哈希回退以兼容阻止未签名 `xxhash` 扩展的环境。
 
-## 作者与许可证
+## 作者与许可
 
-作者/维护者：[https://github.com/OOOHGOD](https://github.com/OOOHGOD)。
+作者 / 维护者：[OOOHGOD](https://github.com/OOOHGOD) · 原创贡献：[MIT License](LICENSE)
 
-原创贡献采用 [MIT 许可证](LICENSE)，允许商用和修改；分发软件副本或实质部分时须保留版权与许可声明。第三方代码、数据、模型和媒体素材保留各自权利，详见 [LICENSE_SCOPE.md](LICENSE_SCOPE.md)。
+允许商用和修改；分发软件副本或实质部分时，须保留版权与许可声明。第三方代码、数据、模型和媒体素材保留各自权利，详见 [许可适用范围](LICENSE_SCOPE.md)。

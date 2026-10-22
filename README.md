@@ -1,11 +1,28 @@
-**English** | [简体中文](README.zh-CN.md)
+<div align="center">
 
 # LeoClaw
 
+A small ReAct coding agent for a workspace you control.
+
+**English** · [简体中文](README.zh-CN.md)
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square) ![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat-square) ![Typer](https://img.shields.io/badge/Typer-009688?style=flat-square) [![MIT License](https://img.shields.io/badge/License-MIT-2563EB?style=flat-square)](LICENSE)
+
+</div>
+
+<p align="center">
+<a href="#overview">Overview</a> · <a href="#install">Install</a> · <a href="#run">Run</a> · <a href="#structure-and-development">Structure and development</a> · <a href="#author--license">Author &amp; License</a>
+</p>
+
+---
+
+> **Project focus** · Agent CLI
+
+
+## Overview
+
 A small ReAct-style coding agent CLI using LangChain model integrations and tool calling to inspect and modify files inside a selected workspace.
 
-**Category:** Artificial Intelligence · AI Agents  
-**Stack:** Python 3.10+ · LangChain Core · Typer · Rich
 
 ## Features
 
@@ -63,8 +80,8 @@ pytest
 
 File and grep tools reject resolved paths outside the workspace, including existing symlink escapes. Shell subprocesses are not an operating-system sandbox; use trusted tasks and workspaces.
 
-## Author and license
+## Author & License
 
-Author / maintainer: [https://github.com/OOOHGOD](https://github.com/OOOHGOD).
+Author / maintainer: [OOOHGOD](https://github.com/OOOHGOD) · Original contributions: [MIT License](LICENSE)
 
-Eligible original contributions are under the [MIT License](LICENSE), permitting commercial use and modification with preservation of copyright and license notices in copies or substantial portions. [License scope](LICENSE_SCOPE.md) explains third-party exclusions and upstream terms.
+Commercial use and modification are permitted with preservation of copyright and license notices in copies or substantial portions. Third-party code, datasets, models, and media retain their own terms; see [license scope](LICENSE_SCOPE.md).
